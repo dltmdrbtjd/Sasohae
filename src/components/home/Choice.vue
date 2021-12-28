@@ -3,7 +3,8 @@
     <div v-if="isLoading" class="splash-wrapper">
       <Splash />
     </div>
-    <div v-else>
+    <div class="choice-item" v-else>
+      <img src="@/assets/UI brand.png" alt="logo" class="logo" />
       <ChoiceItem v-for="item in checkList" :key="item.keys" :item="item" />
     </div>
   </div>
@@ -11,46 +12,21 @@
 <script>
 import Splash from '@/components/home/Splash.vue';
 import ChoiceItem from '@/components/home/ChoiceItem.vue';
-import money from '@/assets/gift.png';
-import food from '@/assets/food.png';
-import gift from '@/assets/gift.png';
-import worry from '@/assets/worry.png';
 export default {
   components: { Splash, ChoiceItem },
   data() {
     return {
       isLoading: false,
-      checkList: [
-        {
-          keys: 1,
-          image: gift,
-          title1: '친구 선물',
-          title2: '이거 어때요?',
-        },
-        {
-          keys: 2,
-          image: food,
-          title1: '오늘 점심은',
-          title2: '이게 좋아요!',
-        },
-        {
-          keys: 3,
-          image: money,
-          title1: '축의금은',
-          title2: '이정도 내세요.',
-        },
-        {
-          keys: 4,
-          image: worry,
-          title1: '고민을',
-          title2: '공유해요.',
-        },
-      ],
     };
   },
   methods: {
     visit() {
       this.isLoading = true;
+    },
+  },
+  computed: {
+    checkList() {
+      return this.$store.state.home.checkList;
     },
   },
   mounted() {
@@ -72,5 +48,17 @@ export default {
   background: {
     color: $main-color;
   }
+}
+.choice-item {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 335px;
+}
+.logo {
+  width: 174px;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 46px;
 }
 </style>
