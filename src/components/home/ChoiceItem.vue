@@ -1,9 +1,11 @@
 <template>
   <div class="item-wrapper button-gradient">
-    <img :src="item.image" alt="money" />
-    <div>
-      <p>{{ item.title1 }}</p>
-      <p>{{ item.title2 }}</p>
+    <div class="item-box">
+      <img :src="item.image" alt="money" />
+      <div>
+        <p>{{ item.title1 }}</p>
+        <p>{{ item.title2 }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -18,16 +20,12 @@ export default {
 .item-wrapper {
   width: 163px;
   height: 260px;
+  margin: {
+    bottom: 30px;
+  }
   border: 1px solid #0da100;
   border-radius: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.item-wrapper img {
-  width: calc(100% - 100px);
-  height: auto;
+  cursor: pointer;
 }
 .item-wrapper p {
   font-weight: $font-bold;
@@ -43,5 +41,13 @@ export default {
   margin: {
     top: 34px;
   }
+}
+.item-box {
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 164px;
 }
 </style>
