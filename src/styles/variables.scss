@@ -1,3 +1,6 @@
+@import './base/normalize';
+@import './base/reset';
+
 // font
 $body-font-family: 'Noto Sans KR', sans-serif;
 
@@ -27,4 +30,3 @@ $hard-brown-color: #9C5400;
 .button-gradient {
   background: linear-gradient(to top right, #ffffff, #F8FDF6);
 }
-
