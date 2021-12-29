@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gift-category />
+    <GiftCategory />
   </div>
 </template>
 <script>
