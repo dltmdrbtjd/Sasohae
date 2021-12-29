@@ -3,9 +3,18 @@
     <div v-if="isLoading" class="splash-wrapper">
       <Splash />
     </div>
-    <div class="choice-item" v-else>
+    <div class="choice-item-wrapper" v-else>
       <img src="@/assets/UI brand.png" alt="logo" class="logo" />
-      <ChoiceItem v-for="item in checkList" :key="item.keys" :item="item" />
+      <div class="choice-item">
+        <ChoiceItem
+          v-for="item in checkList"
+          :key="item.keys"
+          :item="item"
+          @click.native="pageMove(item.name)"
+        >
+          <router-link :to="item.name" />
+        </ChoiceItem>
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +31,9 @@ export default {
   methods: {
     visit() {
       this.isLoading = true;
+    },
+    pageMove(path) {
+      this.$router.push(`${path}`);
     },
   },
   computed: {
@@ -43,7 +55,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .main-wrapper {
-  width: 100%;
+  width: 375px;
   height: 100vh;
   background: {
     color: $main-color;
@@ -55,10 +67,13 @@ export default {
   flex-wrap: wrap;
   width: 335px;
 }
-.logo {
-  width: 174px;
-  height: auto;
-  margin: 0 auto;
-  margin-bottom: 46px;
+.choice-item-wrapper {
+  > .logo {
+    display: block;
+    width: 174px;
+    height: auto;
+    margin: 0 auto;
+    margin-bottom: 46px;
+  }
 }
 </style>
