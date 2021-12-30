@@ -1,0 +1,25 @@
+@mixin questionTitle($margin) {
+  h2 {
+    text-align: center;
+    margin-bottom: $margin;
+    font-size: $font-h1-text;
+    font-weight: $font-bold;
+    border-bottom: 10px solid #fffdcd;
+    position: relative;
+  
+    &:after {
+      content: '';
+      position: absolute;
+      transform: rotate(30deg);
+      bottom: -15px;
+      right: 0;
+      width: 18px;
+      height: 7px;
+      border-radius: 3px;
+      background: {
+        color: #fffdcd;
+      }
+      box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
