@@ -1,12 +1,12 @@
 <template>
   <div>
-    <GiftCategory />
+    <Ranking />
   </div>
 </template>
 <script>
-import GiftCategory from '../components/gift/GiftCategory.vue';
+import Ranking from '@/components/common/Ranking.vue';
 export default {
-  components: { GiftCategory },
+  components: { Ranking },
 };
 </script>
 <style lang="scss" scoped>
@@ -16,5 +16,6 @@ div {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 </style>

@@ -9,13 +9,13 @@
           <p>해주세요</p>
         </div>
       </div>
-      <div>
+      <div @click="moveGiftRandom">
         <div>
           <p>랜덤 추천 받을래요</p>
         </div>
       </div>
     </div>
-    <div class="ranking">실시간 랭킹 순위</div>
+    <div @click="moveGiftRanking" class="ranking">실시간 랭킹 순위</div>
     <span class="ranking-board"></span>
     <img src="@/assets/character.png" alt="character" />
   </div>
@@ -25,6 +25,12 @@ export default {
   methods: {
     moveGiftChoice() {
       this.$router.push('gift-choice');
+    },
+    moveGiftRandom() {
+      this.$router.push('gift-random');
+    },
+    moveGiftRanking() {
+      this.$router.push('gift-ranking');
     },
   },
 };

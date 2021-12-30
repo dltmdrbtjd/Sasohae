@@ -54,7 +54,7 @@
 </template>
 <script>
 import ChoiceList from '@/components/gift/ChoiceList.vue';
-import OXButton from '@/components/common/OXButton.vue';
+import OXButton from '@/components/gift/OXButton.vue';
 import { mapGetters } from 'vuex';
 export default {
   components: { ChoiceList, OXButton },
@@ -118,6 +118,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@include questionTitle(135px);
 .default-question-wrapper {
   width: 100%;
 
@@ -125,30 +126,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-  }
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 135px;
-  font-size: $font-h1-text;
-  font-weight: $font-bold;
-  border-bottom: 10px solid #fffdcd;
-  position: relative;
-
-  &:after {
-    content: '';
-    position: absolute;
-    transform: rotate(30deg);
-    bottom: -15px;
-    right: 0;
-    width: 18px;
-    height: 7px;
-    border-radius: 3px;
-    background: {
-      color: #fffdcd;
-    }
-    box-shadow: 0.5px 2px 4px rgba(0, 0, 0, 0.3);
   }
 }
 </style>
