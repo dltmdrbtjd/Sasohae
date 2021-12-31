@@ -18,6 +18,9 @@ export default {
       return true;
     },
   },
+  mounted() {
+    this.visitedCheck();
+  },
   methods: {
     goBack() {
       if (
@@ -28,6 +31,13 @@ export default {
         return;
       }
       this.$router.go(-1);
+    },
+    async visitedCheck() {
+      const visitDate = localStorage.getItem('visitDate');
+      if (visitDate !== this.$todayDate() || !visitDate) {
+        localStorage.setItem('visitDate', this.$todayDate());
+        await this.$http.put('/main');
+      }
     },
   },
 };
