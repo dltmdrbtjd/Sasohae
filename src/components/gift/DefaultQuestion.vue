@@ -7,6 +7,7 @@
           :title="title"
           v-for="title in questions[pageNum].list"
           :key="title"
+          @click.native="giftAnswer('giftTarget', titleChangeToNumber(title))"
         />
       </div>
     </div>
@@ -17,6 +18,7 @@
           :title="title"
           v-for="title in questions[pageNum].list"
           :key="title"
+          @click.native="giftAnswer('giftEvent', titleChangeToNumber(title))"
         />
       </div>
     </div>
@@ -27,6 +29,7 @@
           :title="title"
           v-for="title in questions[pageNum].list"
           :key="title"
+          @click.native="giftAnswer('sex', titleChangeToNumber(title))"
         />
       </div>
     </div>
@@ -37,6 +40,7 @@
           :title="title"
           v-for="title in questions[pageNum].list"
           :key="title"
+          @click.native="giftAnswer('age', ageChangeToNumber(title))"
         />
       </div>
     </div>
@@ -47,6 +51,7 @@
           :title="title"
           v-for="title in questions[pageNum].list"
           :key="title"
+          @click.native="giftAnswer('giftAnswerExpensive', title)"
         />
       </div>
     </div>
@@ -55,9 +60,11 @@
 <script>
 import ChoiceList from '@/components/gift/ChoiceList.vue';
 import OXButton from '@/components/gift/OXButton.vue';
+import GiftMixins from '@/mixins/GiftMixins.vue';
 import { mapGetters } from 'vuex';
 export default {
   components: { ChoiceList, OXButton },
+  mixins: [GiftMixins],
   data() {
     return {
       questions: [
@@ -99,7 +106,7 @@ export default {
         },
         {
           question: '지갑이 여유로우 신가요?',
-          list: ['예', '아니오', '잘 모르겠어요.'],
+          list: ['네', '아니오', '잘 모르겠어요.'],
         },
       ],
     };
@@ -111,8 +118,23 @@ export default {
     },
   },
   methods: {
-    IncreasePageNum() {
-      this.$store.commit('changePageNum', 1);
+    titleChangeToNumber(title) {
+      if (title === '남자') {
+        return 'M';
+      } else if (title === '여자') {
+        return 'W';
+      }
+      const num = this.questions[this.pageNum - 1].list.findIndex(
+        (i) => i === title,
+      );
+      return String(num + 1);
+    },
+    ageChangeToNumber(title) {
+      if (title !== '그 외') {
+        const age = title.split('대')[0];
+        return age;
+      }
+      return title;
     },
   },
 };
