@@ -26,6 +26,7 @@ export default {
   border-radius: 30px;
   margin-bottom: 20px;
   cursor: pointer;
+  color: $main-color;
 
   &:hover {
     background: {
