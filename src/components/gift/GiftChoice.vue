@@ -55,17 +55,37 @@
         </span>
       </div>
     </div>
+    <Recommended :title="'추천 선물이에요!'" v-else-if="pageNum === 8">
+      <template>
+        <div class="recommend-box">
+          <img :src="giftPhoto" alt="food" />
+          <strong>{{ giftName }}</strong>
+          <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
+          <span class="like-button" @click="likeGift"></span>
+        </div>
+        <button class="refresh" @click="giftRefresh" :disabled="refreshDisable">
+          <span />
+          <p>다른 추천도 준비했어요!</p>
+          <p>{{ giftQuantity }}</p>
+        </button>
+      </template>
+    </Recommended>
   </div>
 </template>
 <script>
 import DefaultQuestion from '@/components/gift/DefaultQuestion.vue';
 import GiftMixins from '@/mixins/GiftMixins.vue';
+import Recommended from '@/components/common/Recommended.vue';
 export default {
-  components: { DefaultQuestion },
+  components: { DefaultQuestion, Recommended },
   mixins: [GiftMixins],
   data() {
     return {
       yesOrNo: ['네', '아니오', '잘 모르겠어요.'],
+      selectedId: null,
+      surveyGifts: [],
+      giftQuantitys: 0,
+      likes: false,
     };
   },
   computed: {
@@ -87,11 +107,47 @@ export default {
     giftAnswers() {
       return this.$store.getters.giftAnswers;
     },
+    giftQuantity() {
+      return `${this.surveyGifts.length - 1} / ${this.giftQuantitys}`;
+    },
+    giftPhoto() {
+      return (
+        this.surveyGifts && this.surveyGifts[0] && this.surveyGifts[0].giftUrl
+      );
+    },
+    giftLikeCnt() {
+      return (
+        this.surveyGifts &&
+        this.surveyGifts[0] &&
+        this.surveyGifts[0].giftLikeCnt
+      );
+    },
+    giftName() {
+      return (
+        this.surveyGifts && this.surveyGifts[0] && this.surveyGifts[0].giftName
+      );
+    },
+    refreshDisable() {
+      if (this.surveyGifts.length === 1) {
+        return true;
+      }
+      return false;
+    },
   },
   mounted() {
     this.$store.dispatch('getQuestion');
   },
   methods: {
+    async likeGift() {
+      const selectedGift = {
+        selectedGift_id: this.selectedId,
+        selectedGift: this.giftName,
+      };
+      if (this.likes) return;
+
+      await this.$http.put('/gifts/result', selectedGift);
+      this.likes = true;
+    },
     randomQuestion(arr) {
       const questionNumber = Math.floor(Math.random() * arr.length);
       const question = arr[questionNumber];
@@ -108,16 +164,22 @@ export default {
       try {
         const body = this.giftAnswers;
         const resp = await this.$http.post('/gifts', body);
-        console.log(resp.data);
+        this.selectedId = resp.data.selectedGift_id;
+        this.surveyGifts = resp.data.surveyGifts;
+        this.giftQuantitys = resp.data.surveyGifts.length;
       } catch (e) {
         throw Error(e);
       }
+    },
+    giftRefresh() {
+      this.surveyGifts.shift();
     },
   },
 };
 </script>
 <style lang="scss" scoped>
 @include questionTitle(135px);
+@include recommend();
 .question-content {
   width: 100%;
   > .flexible {

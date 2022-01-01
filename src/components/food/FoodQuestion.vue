@@ -1,29 +1,85 @@
 <template>
-  <div id="food-category">
-    <div>
-      <strong>당신의 식사를</strong>
-      <strong>해시태그 하세요!</strong>
+  <div class="food-wrapper">
+    <div class="food-category" v-if="!recommend">
+      <div>
+        <strong>당신의 식사를</strong>
+        <strong>해시태그 하세요!</strong>
+      </div>
+      <div class="hash-tag">
+        <p>#느끼함</p>
+        <p>#중식</p>
+        <p>#양식</p>
+      </div>
+      <CategoryButton :category="hashTag.purpose" />
+      <CategoryButton :category="hashTag.menu" />
+      <CategoryButton :category="hashTag.who" />
+      <button class="recommend-button" @click="recommended">추천받기</button>
     </div>
-    <div class="hash-tag">
-      <p>#느끼함</p>
-      <p>#중식</p>
-      <p>#양식</p>
+    <div v-else-if="recommend">
+      <Recommended :title="'오늘은 이 메뉴 어때요?'">
+        <template>
+          <div class="recommend-box">
+            <img :src="menuPhoto" alt="food" />
+            <strong>{{ menuName }}</strong>
+            <p>지금까지 {{ menuLikeCnt }}명이 추천했어요!</p>
+            <span class="like-button"></span>
+          </div>
+          <button
+            class="refresh"
+            @click="menuRefresh"
+            :disabled="refreshDisable"
+          >
+            <span />
+            <p>다른 추천도 준비했어요!</p>
+            <p>{{ menuQuantity }}</p>
+          </button>
+        </template>
+      </Recommended>
     </div>
-    <h2>{{ hashTag.purpose.title }}</h2>
-    <CategoryButton :category="hashTag.purpose" />
-    <h2>{{ hashTag.menu.title }}</h2>
-    <CategoryButton :category="hashTag.menu" />
-    <h2>{{ hashTag.who.title }}</h2>
-    <CategoryButton :category="hashTag.who" />
-    <button class="recommend-button" @click="recommended">추천받기</button>
   </div>
 </template>
 <script>
 import CategoryButton from '@/components/food/CategoryButton.vue';
+import Recommended from '@/components/common/Recommended.vue';
 export default {
-  components: { CategoryButton },
+  components: { CategoryButton, Recommended },
+  computed: {
+    menuAnswer() {
+      return this.$store.getters.menuSet;
+    },
+    menuLikeCnt() {
+      return (
+        this.surveyMenus &&
+        this.surveyMenus[0] &&
+        this.surveyMenus[0].menuLikeCnt
+      );
+    },
+    menuName() {
+      return (
+        this.surveyMenus && this.surveyMenus[0] && this.surveyMenus[0].menuName
+      );
+    },
+    menuPhoto() {
+      return (
+        this.surveyMenus && this.surveyMenus[0] && this.surveyMenus[0].menuUrl
+      );
+    },
+    menuQuantity() {
+      return `${this.surveyMenus.length - 1} / ${this.menuQuantitys}`;
+    },
+    refreshDisable() {
+      if (this.surveyMenus.length === 1) {
+        return true;
+      }
+      return false;
+    },
+  },
   data() {
     return {
+      recommend: false,
+      surveyMenus: [],
+      menuQuantitys: 0,
+      likes: false,
       hashTag: {
         purpose: {
           list: ['식사', '요리', '간식'],
@@ -41,15 +97,28 @@ export default {
     };
   },
   methods: {
-    recommended() {
-      this.$router.push('food-recommend');
+    async recommended() {
+      const answer = this.menuAnswer;
+      const resp = await this.$http.post('/menu', answer);
+      this.surveyMenus = resp.data;
+      this.menuQuantitys = resp.data.length;
+      this.recommend = true;
+
+      console.log(resp.data);
+    },
+    menuRefresh() {
+      this.surveyMenus.shift();
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-#food-category {
+@include recommend();
+.food-category {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   > div:first-child {
     position: relative;
@@ -79,17 +148,11 @@ export default {
       }
     }
   }
-
-  > h2 {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-weight: $font-bold;
-  }
 }
 
 .hash-tag {
   display: flex;
-  width: 70%;
+  width: 80%;
   justify-content: flex-start;
   margin-bottom: 40px;
   p {
