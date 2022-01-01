@@ -36,6 +36,9 @@ const mutations = {
   addGiftAnswer(state, request) {
     state.giftAnswer[request.key] = request.answer;
   },
+  pageNumReset(state) {
+    state.pageNum = 0;
+  },
 };
 
 const actions = {
