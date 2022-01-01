@@ -1,8 +1,11 @@
 <template>
-  <div class="button-list-wrapper">
-    <div v-for="list in category.list" :key="list[0]">
-      <input type="radio" :id="list" :name="`${category.title}`" />
-      <label :for="list" @click="categoryValue(list)">{{ list }}</label>
+  <div class="category-wrapper">
+    <h2>{{ category.title }}</h2>
+    <div class="button-list-wrapper">
+      <div v-for="list in category.list" :key="list[0]">
+        <input type="radio" :id="list" :name="`${category.title}`" />
+        <label :for="list" @click="categoryValue(list)">{{ list }}</label>
+      </div>
     </div>
   </div>
 </template>
@@ -15,18 +18,49 @@ export default {
   },
   methods: {
     categoryValue(list) {
-      console.log(list);
-      return 1;
+      let num = this.category.list.findIndex((i) => i === list);
+
+      if (num === 0 && list !== '식사') num = '*';
+      else if (num === 0 && list === '식사') num += 1;
+      this.menuSettingAnswer(num);
+      console.log(this.$store.getters.menuSet);
+    },
+    menuSettingAnswer(types) {
+      switch (this.category.title) {
+        case '목적':
+          this.$store.commit('choiceMenuType', types);
+          break;
+        case '종류':
+          this.$store.commit('choiceMenuStyle', types);
+          break;
+        case '누구랑?':
+          this.$store.commit('choiceMenuWith', types);
+          break;
+        default:
+          break;
+      }
     },
   },
 };
 </script>
 <style lang="scss" scoped>
+.category-wrapper {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h2 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-weight: $font-bold;
+  text-align: center;
+}
 .button-list-wrapper {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 80%;
+  width: 100%;
 }
 input[type='radio'] {
   display: none;
