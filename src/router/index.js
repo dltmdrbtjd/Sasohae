@@ -57,14 +57,6 @@ const routes = [
       ),
   },
   {
-    path: '/food-recommend',
-    name: 'FoodRecommend',
-    component: () =>
-      import(
-        /* webpackChunkName: "food-recommend" */ '@/views/food/FoodRecommendPage.vue'
-      ),
-  },
-  {
     path: '/food-ranking',
     name: 'FoodRanking',
     component: () =>
