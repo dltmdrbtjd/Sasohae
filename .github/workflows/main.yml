@@ -19,6 +19,15 @@ jobs:
 
       - name: npm install
         run: npm install
+        
+      - name: Create .env
+        shell: bash
+        env:
+          ENV_VUE_APP_BASE_URL: ${{ secrets.VUE_APP_BASE_URL }}
+        run: |
+          touch .env
+          echo VUE_APP_BASE_URL="$ENV_VUE_APP_BASE_URL" >> .env
+          cat .env
 
       - name: build
         run: npm run build
