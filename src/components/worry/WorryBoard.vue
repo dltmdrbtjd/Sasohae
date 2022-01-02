@@ -5,26 +5,55 @@
       내 고민도 적어볼게요.
     </button>
     <div class="board-list">
-      <p>나는 이런게 고민이야 정말루!!asdasdasdasdasd</p>
-      <p>아 이게 인생인가 ?</p>
-      <p>고독하구만...</p>
+      <p v-for="comment in comments" :key="comment.comment">
+        {{ comment.comment }}
+      </p>
+      <InfiniteLoading @infinite="infiniteHandler" spinner="waveDots">
+        <div slot="no-more" style="color: rgb(255, 255, 255)">
+          마지막 게시물 이에요 :)
+        </div>
+      </InfiniteLoading>
     </div>
     <BlurBox v-if="isModal" @modaldeactive="modalActive">
       <div class="write-box">
-        <textarea class="write-area" name="worry" maxlength="100"></textarea>
-        <button class="write-success">고민 다 적었어요.</button>
+        <textarea
+          class="write-area"
+          name="worry"
+          maxlength="100"
+          v-model="userComment"
+          placeholder="여러분의 고민을 작성해보세요 :)"
+        ></textarea>
+        <button class="write-success" @click="addComment()">
+          고민 다 적었어요.
+        </button>
       </div>
     </BlurBox>
   </div>
 </template>
 <script>
+import InfiniteLoading from 'vue-infinite-loading';
 import BlurBox from '@/components/common/BlurBox.vue';
 export default {
-  components: { BlurBox },
+  components: { BlurBox, InfiniteLoading },
   data() {
     return {
       isModal: false,
+      pageNum: 0,
+      comments: [],
+      isVisit: false,
+      userComment: '',
     };
+  },
+  mounted() {
+    this.visited();
+  },
+  computed: {
+    visitedCheck() {
+      if (this.isVisit) {
+        return `/comments?commentIdx=${this.pageNum}&visited=${this.isVisit}`;
+      }
+      return `/comments?commentIdx=${this.pageNum}`;
+    },
   },
   methods: {
     modalActive() {
@@ -32,6 +61,43 @@ export default {
         this.isModal = false;
       } else {
         this.isModal = true;
+      }
+    },
+    async addComment() {
+      try {
+        const commentData = {
+          comment: this.userComment,
+        };
+        await this.$http.post('/comments', commentData);
+        this.comments.unshift(this.userComment);
+        this.isModal = false;
+        location.reload();
+      } catch (e) {
+        throw Error(e);
+      }
+    },
+    async visited() {
+      const visitDate = localStorage.getItem('comments_VisitDate');
+      if (visitDate !== this.$todayDate() || !visitDate) {
+        localStorage.setItem('comments_VisitDate', this.$todayDate());
+        this.isVisit = 'up';
+      }
+    },
+    async infiniteHandler($state) {
+      try {
+        const { data } = await this.$http.get(this.visitedCheck);
+        const arrChecked = data.length > 1 ? true : false;
+        if (arrChecked) {
+          setTimeout(() => {
+            this.pageNum += data.length;
+            this.comments.push(...data);
+            $state.loaded();
+          }, 500);
+        } else {
+          $state.complete();
+        }
+      } catch (e) {
+        throw Error(e);
       }
     },
   },
@@ -96,7 +162,7 @@ export default {
 .write-area {
   resize: none;
   border: none;
-  width: 100%;
+  width: 90%;
   height: 300px;
   padding: 16px;
   color: $white-color;
