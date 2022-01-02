@@ -22,7 +22,7 @@
             <img :src="menuPhoto" alt="food" />
             <strong>{{ menuName }}</strong>
             <p>지금까지 {{ menuLikeCnt }}명이 추천했어요!</p>
-            <span class="like-button"></span>
+            <span class="like-button" @click="likeFood"></span>
           </div>
           <button
             class="refresh"
@@ -103,11 +103,19 @@ export default {
       this.surveyMenus = resp.data;
       this.menuQuantitys = resp.data.length;
       this.recommend = true;
-
-      console.log(resp.data);
     },
     menuRefresh() {
       this.surveyMenus.shift();
+    },
+    async likeFood() {
+      try {
+        const menu = {
+          menuName: this.menuName,
+        };
+        await this.$http.put('/menu', menu);
+      } catch (e) {
+        throw Error(e);
+      }
     },
   },
 };
