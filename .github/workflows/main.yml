@@ -7,13 +7,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-      - name: git clone
+      - name: Checkout source code
         uses: actions/checkout@master
 
       - name: npm install
         run: npm install
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@main
+        with:
+          node-version: 14.x
 
       - name: build
         run: npm run build
