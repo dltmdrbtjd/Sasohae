@@ -26,8 +26,11 @@ const mutations = {
   },
 };
 
+const actions = {};
+
 export default {
   state,
   mutations,
   getters,
+  actions,
 };
