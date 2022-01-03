@@ -6,11 +6,19 @@ const state = {
     menuStyle: '',
     menuWith: '',
   },
+  hashTag: {
+    type: '',
+    style: '',
+    with: '',
+  },
 };
 
 const getters = {
   menuSet(state) {
     return state.menuSetting;
+  },
+  Tags(state) {
+    return state.hashTag;
   },
 };
 
@@ -23,6 +31,20 @@ const mutations = {
   },
   choiceMenuWith(state, person) {
     state.menuSetting.menuWith = person;
+  },
+  menuType(state, type) {
+    state.hashTag.type = type;
+  },
+  menuStyle(state, style) {
+    state.hashTag.style = style;
+  },
+  menuWith(state, person) {
+    state.hashTag.with = person;
+  },
+  menuReset(state) {
+    state.hashTag.type = '';
+    state.hashTag.with = '';
+    state.hashTag.style = '';
   },
 };
 
