@@ -6,9 +6,9 @@
         <strong>해시태그 하세요!</strong>
       </div>
       <div class="hash-tag">
-        <p>#느끼함</p>
-        <p>#중식</p>
-        <p>#양식</p>
+        <p v-if="menuHashTag.type">#{{ menuHashTag.type }}</p>
+        <p v-if="menuHashTag.style">#{{ menuHashTag.style }}</p>
+        <p v-if="menuHashTag.with">#{{ menuHashTag.with }}</p>
       </div>
       <CategoryButton :category="hashTag.purpose" />
       <CategoryButton :category="hashTag.menu" />
@@ -46,6 +46,9 @@ export default {
   computed: {
     menuAnswer() {
       return this.$store.getters.menuSet;
+    },
+    menuHashTag() {
+      return this.$store.getters.Tags;
     },
     menuLikeCnt() {
       return (
@@ -98,6 +101,7 @@ export default {
   },
   methods: {
     async recommended() {
+      this.$store.commit('menuReset');
       const answer = this.menuAnswer;
       const resp = await this.$http.post('/menu', answer);
       this.surveyMenus = resp.data;

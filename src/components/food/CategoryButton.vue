@@ -18,12 +18,11 @@ export default {
   },
   methods: {
     categoryValue(list) {
+      this.menuHashTag(list);
       let num = this.category.list.findIndex((i) => i === list);
-
       if (num === 0 && list !== '식사') num = '*';
       else if (num === 0 && list === '식사') num += 1;
       this.menuSettingAnswer(num);
-      console.log(this.$store.getters.menuSet);
     },
     menuSettingAnswer(types) {
       switch (this.category.title) {
@@ -35,6 +34,21 @@ export default {
           break;
         case '누구랑?':
           this.$store.commit('choiceMenuWith', types);
+          break;
+        default:
+          break;
+      }
+    },
+    menuHashTag(tag) {
+      switch (this.category.title) {
+        case '목적':
+          this.$store.commit('menuType', tag);
+          break;
+        case '종류':
+          this.$store.commit('menuStyle', tag);
+          break;
+        case '누구랑?':
+          this.$store.commit('menuWith', tag);
           break;
         default:
           break;
