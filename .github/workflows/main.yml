@@ -40,8 +40,7 @@ jobs:
         run: |
           aws s3 sync \
             --region ap-northeast-2 \
-            _site s3://sasohae.com \
-            --delete
+            ./dist s3://sasohae.com \
       - name: Invalidate Cache
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
