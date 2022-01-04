@@ -7,7 +7,11 @@
         <button @click="questionAnswer(2)">아니오.</button>
       </div>
     </div>
-    <Recommended :title="'축의금은 이만큼 내세요!'" v-if="lastQuestion">
+    <Recommended
+      :title="'축의금은 이만큼 내세요!'"
+      v-if="lastQuestion"
+      @recommendEvent="moneyRecommendCnt"
+    >
       <template>
         <div class="recommend-box">
           <img src="@/assets/congratulations_money.png" alt="food" />
@@ -52,7 +56,10 @@ export default {
         answer = 'O';
       else if (answer === 2 && this.question.negativeAnswerQuestion !== 'X')
         answer = 'X';
-      else this.lastQuestion = true;
+      else {
+        this.moneyRecommendCnt();
+        this.lastQuestion = true;
+      }
       try {
         let answers = {
           moneyQuestion_id: this.question.moneyQuestion_id,
@@ -62,6 +69,13 @@ export default {
         const nextQuestion = resp.data;
         this.recommendMoneyCnt += nextQuestion.positiveChangeValue;
         this.question = nextQuestion;
+      } catch (e) {
+        throw Error(e);
+      }
+    },
+    async moneyRecommendCnt() {
+      try {
+        await this.$http.put('money');
       } catch (e) {
         throw Error(e);
       }

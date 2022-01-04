@@ -46,6 +46,7 @@ export default {
   },
   mounted() {
     this.visited();
+    this.worryVisitedCnt();
   },
   computed: {
     visitedCheck() {
@@ -81,6 +82,15 @@ export default {
       if (visitDate !== this.$todayDate() || !visitDate) {
         localStorage.setItem('comments_VisitDate', this.$todayDate());
         this.isVisit = 'up';
+      }
+    },
+    async worryVisitedCnt() {
+      try {
+        if (this.isVisit === 'up') {
+          this.$http.put('/comments');
+        }
+      } catch (e) {
+        throw Error(e);
       }
     },
     async infiniteHandler($state) {

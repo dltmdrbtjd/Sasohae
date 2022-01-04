@@ -16,7 +16,10 @@
       <button class="recommend-button" @click="recommended">추천받기</button>
     </div>
     <div v-else-if="recommend">
-      <Recommended :title="'오늘은 이 메뉴 어때요?'">
+      <Recommended
+        :title="'오늘은 이 메뉴 어때요?'"
+        @recommendEvent="menuRecommendCnt"
+      >
         <template>
           <div class="recommend-box">
             <img :src="menuPhoto" alt="food" />
@@ -100,6 +103,16 @@ export default {
     };
   },
   methods: {
+    async menuRecommendCnt() {
+      try {
+        const bodyData = {
+          menuName: this.menuName,
+        };
+        await this.$http.put('/menu/recommend', bodyData);
+      } catch (e) {
+        throw Error(e);
+      }
+    },
     async recommended() {
       this.$store.commit('menuReset');
       const answer = this.menuAnswer;
@@ -116,7 +129,9 @@ export default {
         const menu = {
           menuName: this.menuName,
         };
+        if (this.likes) return;
         await this.$http.put('/menu', menu);
+        this.likes = true;
       } catch (e) {
         throw Error(e);
       }

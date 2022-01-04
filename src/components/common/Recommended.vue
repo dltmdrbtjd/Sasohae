@@ -19,6 +19,7 @@ export default {
   },
   methods: {
     goMainPage() {
+      this.$emit('recommendEvent');
       this.$store.commit('pageNumReset');
       this.$router.push('/');
     },

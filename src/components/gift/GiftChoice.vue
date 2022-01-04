@@ -55,7 +55,11 @@
         </span>
       </div>
     </div>
-    <Recommended :title="'추천 선물이에요!'" v-else-if="pageNum === 8">
+    <Recommended
+      :title="'추천 선물이에요!'"
+      v-else-if="pageNum === 8"
+      @recommendEvent="recommendCnt"
+    >
       <template>
         <div class="recommend-box">
           <img :src="giftPhoto" alt="food" />
@@ -138,6 +142,16 @@ export default {
     this.$store.dispatch('getQuestion');
   },
   methods: {
+    async recommendCnt() {
+      try {
+        const bodyData = {
+          selectedGift: this.surveyGifts[0].giftName,
+        };
+        await this.$http.put('gifts/recommend', bodyData);
+      } catch (e) {
+        throw Error(e);
+      }
+    },
     async likeGift() {
       const selectedGift = {
         selectedGift_id: this.selectedId,
@@ -145,7 +159,7 @@ export default {
       };
       if (this.likes) return;
 
-      await this.$http.put('/gifts/result', selectedGift);
+      await this.$http.put('/gifts/like', selectedGift);
       this.likes = true;
     },
     randomQuestion(arr) {
