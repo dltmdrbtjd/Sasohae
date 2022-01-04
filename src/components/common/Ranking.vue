@@ -2,23 +2,41 @@
   <div id="ranking-wrapper">
     <h2>실시간 선물 랭킹 !</h2>
     <div class="ranking-list">
-      <div>
-        <img src="@/assets/food.png" alt="food" />
-        <strong class="ranking-number">1</strong>
-        <div class="title-box">
-          <p>케이크</p>
-          <p>1700명 추천 !</p>
+      <div v-for="rank in ranking" :key="rank.rank">
+        <img :src="rank.imgUrl" alt="food" />
+        <div class="ranking-number">
+          <strong>{{ rank.rank }}</strong>
+          <span v-if="rank.variance > 0">
+            <img src="@/assets/up.png" alt="up" />
+            <p class="up">{{ rank.variance }}</p>
+          </span>
+          <span v-else-if="rank.variance < 0">
+            <img src="@/assets/down.png" alt="down" />
+            <p class="down">{{ rank.variance }}</p>
+          </span>
+          <span v-else-if="rank.variance === 'New'">
+            <p class="new">{{ rank.variance }}</p>
+          </span>
+          <span v-else>
+            <p>- {{ rank.variance }}</p>
+          </span>
         </div>
-        <span class="right-arrow" @click="modalActive"></span>
+        <div class="title-box">
+          <p>{{ rank.title }}</p>
+          <p>{{ rank.likeCnt }}명 추천 !</p>
+        </div>
+        <span class="right-arrow" @click="modalActive(rank)"></span>
       </div>
     </div>
     <BlurBox v-if="isModal" @modaldeactive="modalActive">
       <div class="card">
-        <img src="@/assets/gift.png" alt="gift" />
-        <strong>1,700명이 좋아한</strong>
-        <strong>케이크입니다.</strong>
-        <p>다른 선물을 추천 받고 싶으세요?</p>
-        <button @click="moveToGiftPage">선물 추천받으러 가기</button>
+        <img :src="detailRank.imgUrl" alt="gift" />
+        <strong>{{ detailRank.likeCnt }}명이 좋아한</strong>
+        <strong>{{ detailRank.title }}입니다.</strong>
+        <p>다른 {{ categoryCheck }} 추천 받고 싶으세요?</p>
+        <button @click="moveToGiftPage">
+          {{ categoryCheck }} 추천받으러 가기
+        </button>
       </div>
     </BlurBox>
   </div>
@@ -27,21 +45,39 @@
 import BlurBox from '@/components/common/BlurBox.vue';
 export default {
   components: { BlurBox },
+  props: {
+    ranking: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       isModal: false,
+      detailRank: null,
     };
+  },
+  computed: {
+    categoryCheck() {
+      if (this.$route.path === '/gift-ranking') {
+        return '선물';
+      }
+      return '메뉴';
+    },
   },
   methods: {
     moveToGiftPage() {
       if (this.$route.path === '/gift-ranking') {
         this.$router.push('gift');
+      } else if (this.$route.path === '/food-ranking') {
+        this.$router.push('food');
       }
     },
-    modalActive() {
+    modalActive(rank) {
       if (this.isModal) {
         this.isModal = false;
       } else {
+        this.detailRank = rank;
         this.isModal = true;
       }
     },
@@ -147,13 +183,41 @@ h2 {
       height: 40px;
     }
 
-    > strong {
+    > .ranking-number {
       width: 20%;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 25px;
-      font-weight: $font-bold;
+      flex-direction: column;
+
+      > strong {
+        font-size: 25px;
+        font-weight: $font-bold;
+      }
+
+      > span {
+        display: flex;
+        color: #878787;
+
+        > img {
+          width: 8px;
+          height: 8px;
+          margin-top: 3px;
+          margin-right: 3px;
+        }
+
+        > .up {
+          color: #e54240;
+        }
+
+        > .down {
+          color: #00b2ff;
+        }
+
+        > .new {
+          color: #ff1acd;
+        }
+      }
     }
 
     .title-box {

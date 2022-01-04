@@ -1,12 +1,30 @@
 <template>
   <div>
-    <Ranking />
+    <Ranking :ranking="ranking" />
   </div>
 </template>
 <script>
 import Ranking from '@/components/common/Ranking.vue';
 export default {
   components: { Ranking },
+  data() {
+    return {
+      ranking: [],
+    };
+  },
+  mounted() {
+    this.getGiftRanking();
+  },
+  methods: {
+    async getGiftRanking() {
+      try {
+        const resp = await this.$http.get('/gifts/ranking');
+        this.ranking = resp.data;
+      } catch (e) {
+        throw Error(e);
+      }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
