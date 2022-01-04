@@ -37,6 +37,9 @@
         <button @click="moveToGiftPage">
           {{ categoryCheck }} 추천받으러 가기
         </button>
+        <button class="home-btn" @click="moveToHomePage">
+          홈으로 돌아가기
+        </button>
       </div>
     </BlurBox>
   </div>
@@ -66,6 +69,9 @@ export default {
     },
   },
   methods: {
+    moveToHomePage() {
+      this.$router.push('/');
+    },
     moveToGiftPage() {
       if (this.$route.path === '/gift-ranking') {
         this.$router.push('gift');
@@ -107,6 +113,17 @@ h2 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  > .home-btn {
+    border: 1px solid $black-color;
+    color: $black-color;
+    &:hover {
+      background: {
+        color: $black-color;
+      }
+      color: $white-color;
+    }
+  }
 
   > img {
     width: 140px;
