@@ -27,13 +27,13 @@ export default {
     menuSettingAnswer(types) {
       switch (this.category.title) {
         case '목적':
-          this.$store.commit('choiceMenuType', types);
+          this.$store.commit('choiceMenuType', String(types));
           break;
         case '종류':
-          this.$store.commit('choiceMenuStyle', types);
+          this.$store.commit('choiceMenuStyle', String(types));
           break;
         case '누구랑?':
-          this.$store.commit('choiceMenuWith', types);
+          this.$store.commit('choiceMenuWith', String(types));
           break;
         default:
           break;

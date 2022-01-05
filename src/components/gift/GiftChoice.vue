@@ -9,7 +9,7 @@
           @click="
             answer('giftAnswerPersonality', [
               personalQuestion.giftQuestion,
-              title,
+              titleChangeToNumber(title),
             ])
           "
           :title="title"
@@ -28,7 +28,7 @@
           @click="
             answer('giftAnswerEmotional', [
               emotionalQuestion.giftQuestion,
-              title,
+              titleChangeToNumber(title),
             ])
           "
           :title="title"
@@ -45,7 +45,10 @@
         <span
           class="button"
           @click="
-            answer('giftAnswerTrendy', [trendyQuestion.giftQuestion, title])
+            answer('giftAnswerTrendy', [
+              trendyQuestion.giftQuestion,
+              titleChangeToNumber(title),
+            ])
           "
           :title="title"
           v-for="title in yesOrNo"
@@ -187,6 +190,16 @@ export default {
     },
     giftRefresh() {
       this.surveyGifts.shift();
+    },
+    titleChangeToNumber(title) {
+      switch (title) {
+        case '네':
+          return 'T';
+        case '아니오':
+          return 'F';
+        case '잘 모르겠어요.':
+          return '*';
+      }
     },
   },
 };
