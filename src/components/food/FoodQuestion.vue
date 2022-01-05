@@ -25,7 +25,11 @@
             <img :src="menuPhoto" alt="food" />
             <strong>{{ menuName }}</strong>
             <p>지금까지 {{ menuLikeCnt }}명이 추천했어요!</p>
-            <span class="like-button" @click="likeFood"></span>
+            <span
+              class="unlike-button"
+              :class="islike"
+              @click="likeFood"
+            ></span>
           </div>
           <button
             class="refresh"
@@ -47,6 +51,12 @@ import Recommended from '@/components/common/Recommended.vue';
 export default {
   components: { CategoryButton, Recommended },
   computed: {
+    islike() {
+      if (this.likes) {
+        return 'like';
+      }
+      return '';
+    },
     menuAnswer() {
       return this.$store.getters.menuSet;
     },
@@ -122,6 +132,7 @@ export default {
       this.recommend = true;
     },
     menuRefresh() {
+      this.likes = false;
       this.surveyMenus.shift();
     },
     async likeFood() {
@@ -132,6 +143,7 @@ export default {
         if (this.likes) return;
         await this.$http.put('/menu', menu);
         this.likes = true;
+        this.surveyMenus[0].menuLikeCnt += 1;
       } catch (e) {
         throw Error(e);
       }
