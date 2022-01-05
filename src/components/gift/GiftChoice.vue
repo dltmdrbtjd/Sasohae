@@ -19,6 +19,7 @@
           <p>{{ title }}</p>
         </span>
       </div>
+      <p>선물을 받으시는분에 대한 질문입니다.</p>
     </div>
     <div v-else-if="pageNum === 6" class="question-content">
       <h2>{{ emotionalQuestion.giftQuestion }}</h2>
@@ -38,6 +39,7 @@
           <p>{{ title }}</p>
         </span>
       </div>
+      <p>선물을 받으시는분에 대한 질문입니다.</p>
     </div>
     <div v-else-if="pageNum === 7" class="question-content">
       <h2>{{ trendyQuestion.giftQuestion }}</h2>
@@ -57,6 +59,7 @@
           <p>{{ title }}</p>
         </span>
       </div>
+      <p>선물을 받으시는분에 대한 질문입니다.</p>
     </div>
     <Recommended
       :title="'추천 선물이에요!'"
@@ -68,7 +71,7 @@
           <img :src="giftPhoto" alt="food" />
           <strong>{{ giftName }}</strong>
           <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
-          <span class="like-button" @click="likeGift"></span>
+          <span class="unlike-button" :class="islike" @click="likeGift"></span>
         </div>
         <button class="refresh" @click="giftRefresh" :disabled="refreshDisable">
           <span />
@@ -96,6 +99,12 @@ export default {
     };
   },
   computed: {
+    islike() {
+      if (this.likes) {
+        return 'like';
+      }
+      return '';
+    },
     question() {
       return this.$store.getters.giftQuestions;
     },
@@ -164,6 +173,7 @@ export default {
 
       await this.$http.put('/gifts/like', selectedGift);
       this.likes = true;
+      this.surveyGifts[0].giftLikeCnt += 1;
     },
     randomQuestion(arr) {
       const questionNumber = Math.floor(Math.random() * arr.length);
@@ -189,6 +199,7 @@ export default {
       }
     },
     giftRefresh() {
+      this.likes = false;
       this.surveyGifts.shift();
     },
     titleChangeToNumber(title) {
@@ -231,6 +242,13 @@ export default {
         color: $white-color;
       }
     }
+  }
+
+  > p:last-child {
+    font-weight: $font-bold;
+    color: $main-color;
+    margin-top: 60px;
+    text-align: center;
   }
 }
 </style>

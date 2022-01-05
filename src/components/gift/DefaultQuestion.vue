@@ -32,6 +32,7 @@
           @click.native="giftAnswer('sex', titleChangeToNumber(title))"
         />
       </div>
+      <p>상대분의 성별을 선택해주시면 됩니다.</p>
     </div>
     <div v-else-if="pageNum === 3">
       <h2>{{ questions[pageNum].question }}</h2>
@@ -43,6 +44,7 @@
           @click.native="giftAnswer('age', ageChangeToNumber(title))"
         />
       </div>
+      <p>상대분의 나이를 선택해주시면 됩니다.</p>
     </div>
     <div v-else-if="pageNum === 4">
       <h2>{{ questions[pageNum].question }}</h2>
@@ -148,6 +150,13 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 60px;
+    color: $main-color;
+    font-weight: $font-bold;
   }
 }
 </style>
