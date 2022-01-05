@@ -30,7 +30,10 @@ export default {
   },
   methods: {
     visit() {
-      this.isLoading = true;
+      if (!this.isSplash) {
+        this.isLoading = true;
+        this.$store.commit('isVisited', true);
+      }
     },
     pageMove(path) {
       this.$router.push(`${path}`);
@@ -39,6 +42,9 @@ export default {
   computed: {
     checkList() {
       return this.$store.state.home.checkList;
+    },
+    isSplash() {
+      return this.$store.getters.isSplash;
     },
   },
   mounted() {
