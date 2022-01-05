@@ -4,6 +4,7 @@ import gift from '@/assets/gift.png';
 import worry from '@/assets/worry.png';
 
 const state = {
+  isSplash: false,
   checkList: [
     {
       keys: 1,
@@ -36,6 +37,20 @@ const state = {
   ],
 };
 
+const getters = {
+  isSplash(state) {
+    return state.isSplash;
+  },
+};
+
+const mutations = {
+  isVisited(state, payload) {
+    state.isSplash = payload;
+  },
+};
+
 export default {
   state,
+  getters,
+  mutations,
 };
