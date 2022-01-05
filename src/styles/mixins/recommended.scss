@@ -31,7 +31,7 @@
     font-weight: $font-regular;
     font-size: $font-small-button-text;
   }
-  .like-button {
+  .unlike-button {
     width: 99px;
     height: 42px;
     display: block;
@@ -48,6 +48,12 @@
       }
     }
     cursor: pointer;
+  }
+}
+
+.like {
+  background: {
+    image: url('../../assets/like-hover.png') !important;
   }
 }
 
