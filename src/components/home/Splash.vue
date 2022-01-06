@@ -15,7 +15,7 @@
 <style lang="scss" scoped>
 #splash-wrapper {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   height: 100vh;
 }
 .splash {

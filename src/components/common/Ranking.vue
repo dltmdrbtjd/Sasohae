@@ -1,6 +1,6 @@
 <template>
   <div id="ranking-wrapper">
-    <h2>실시간 선물 랭킹 !</h2>
+    <h2>실시간 {{ categoryCheck }} 랭킹 !</h2>
     <div class="ranking-list">
       <div v-for="rank in ranking" :key="rank.rank">
         <img :src="rank.imgUrl" alt="food" />

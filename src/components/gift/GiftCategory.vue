@@ -4,7 +4,6 @@
     <div class="gift-recommended">
       <div @click="moveGiftChoice">
         <div>
-          <p>상황별</p>
           <p>선물 추천</p>
           <p>해주세요</p>
         </div>
