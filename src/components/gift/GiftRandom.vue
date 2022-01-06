@@ -5,6 +5,7 @@
         <img :src="giftPhoto" alt="food" />
         <strong>{{ giftName }}</strong>
         <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
+        <span class="shared"></span>
       </div>
     </template>
   </Recommended>

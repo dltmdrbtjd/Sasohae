@@ -16,6 +16,7 @@
         <div class="recommend-box">
           <img src="@/assets/congratulations_money.png" alt="food" />
           <strong>{{ recommendMoneyCnt }} 만원</strong>
+          <span @click="sendKaKaoLink" class="shared"></span>
         </div>
       </template>
     </Recommended>
@@ -23,8 +24,10 @@
 </template>
 <script>
 import Recommended from '@/components/common/Recommended.vue';
+import Shared from '@/mixins/Shared.vue';
 export default {
   components: { Recommended },
+  mixins: [Shared],
   data() {
     return {
       question: {

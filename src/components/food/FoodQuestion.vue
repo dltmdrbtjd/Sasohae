@@ -30,6 +30,7 @@
               :class="islike"
               @click="likeFood"
             ></span>
+            <span class="shared" @click="sendKaKaoLink"></span>
           </div>
           <button
             class="refresh"
@@ -48,8 +49,10 @@
 <script>
 import CategoryButton from '@/components/food/CategoryButton.vue';
 import Recommended from '@/components/common/Recommended.vue';
+import Shared from '@/mixins/Shared.vue';
 export default {
   components: { CategoryButton, Recommended },
+  mixins: [Shared],
   computed: {
     islike() {
       if (this.likes) {

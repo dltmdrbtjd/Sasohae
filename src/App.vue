@@ -24,8 +24,10 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
 import GoBackButton from '@/components/common/goBackArrow.vue';
+import Shared from '@/mixins/Shared.vue';
 export default {
   components: { GoBackButton },
+  mixins: [Shared],
   computed: {
     isPageCheck() {
       if (this.$route.path === '/') {
@@ -55,31 +57,6 @@ export default {
         await this.$http.put('/main');
       }
     },
-    sendKaKaoLink() {
-      this.$kakao.Link.sendDefault({
-        // templateId: '68260',
-        objectType: 'feed',
-        content: {
-          title: '사회초년생의 소소한 고민',
-          description: '사.소.해',
-          imageUrl:
-            'https://s3.ap-northeast-2.amazonaws.com/sasohae.com/img/character+brand.png',
-          link: {
-            webUrl: 'https://sasohae.com',
-            mobileWebUrl: 'https://sasohae.com',
-          },
-        },
-        buttons: [
-          {
-            title: '웹으로 보기',
-            link: {
-              mobileWebUrl: 'https://sasohae.com',
-              webUrl: 'https://sasohae.com',
-            },
-          },
-        ],
-      });
-    },
   },
 };
 </script>
@@ -107,6 +84,9 @@ export default {
       size: cover;
     }
   }
+  .share-btn {
+    display: none;
+  }
 }
 
 @media (max-width: 500px) {
@@ -125,6 +105,9 @@ export default {
   }
   #app {
     font-family: $body-font-family;
+  }
+  .share-btn {
+    display: none;
   }
 }
 

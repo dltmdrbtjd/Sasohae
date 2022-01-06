@@ -72,6 +72,7 @@
           <strong>{{ giftName }}</strong>
           <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
           <span class="unlike-button" :class="islike" @click="likeGift"></span>
+          <span class="shared" @click="sendKaKaoLink"></span>
         </div>
         <button class="refresh" @click="giftRefresh" :disabled="refreshDisable">
           <span />
@@ -86,9 +87,10 @@
 import DefaultQuestion from '@/components/gift/DefaultQuestion.vue';
 import GiftMixins from '@/mixins/GiftMixins.vue';
 import Recommended from '@/components/common/Recommended.vue';
+import Shared from '@/mixins/Shared.vue';
 export default {
   components: { DefaultQuestion, Recommended },
-  mixins: [GiftMixins],
+  mixins: [GiftMixins, Shared],
   data() {
     return {
       yesOrNo: ['네', '아니오', '잘 모르겠어요.'],
