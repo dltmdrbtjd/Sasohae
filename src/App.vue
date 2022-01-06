@@ -61,7 +61,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@media (min-width: 600px) {
+@media (min-width: 501px) {
   #view {
     position: relative;
     top: 0;
