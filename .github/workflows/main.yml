@@ -31,9 +31,11 @@ jobs:
         shell: bash
         env:
           ENV_VUE_APP_BASE_URL: ${{ secrets.VUE_APP_BASE_URL }}
+          ENV_VUE_APP_KAKAO: ${{ secrets.VUE_APP_KAKAO }}
         run: |
           touch .env
           echo VUE_APP_BASE_URL="$ENV_VUE_APP_BASE_URL" >> .env
+          echo VUE_APP_KAKAO="$ENV_VUE_APP_KAKAO" >> .env
           cat .env
 
       - name: build
