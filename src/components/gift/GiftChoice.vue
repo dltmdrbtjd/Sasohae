@@ -88,9 +88,10 @@ import DefaultQuestion from '@/components/gift/DefaultQuestion.vue';
 import GiftMixins from '@/mixins/GiftMixins.vue';
 import Recommended from '@/components/common/Recommended.vue';
 import Shared from '@/mixins/Shared.vue';
+import Question from '@/components/common/Question.vue';
 export default {
   components: { DefaultQuestion, Recommended },
-  mixins: [GiftMixins, Shared],
+  mixins: [GiftMixins, Shared, Question],
   data() {
     return {
       yesOrNo: ['네', '아니오', '잘 모르겠어요.'],

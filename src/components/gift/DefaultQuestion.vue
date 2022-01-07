@@ -1,71 +1,63 @@
 <template>
   <div class="default-question-wrapper">
-    <div v-if="pageNum === 0">
-      <h2>{{ questions[pageNum].question }}</h2>
-      <div class="flexible">
-        <ChoiceList
-          :title="title"
-          v-for="title in questions[pageNum].list"
-          :key="title"
-          @click.native="giftAnswer('giftTarget', titleChangeToNumber(title))"
-        />
-      </div>
-    </div>
-    <div v-else-if="pageNum === 1">
-      <h2>{{ questions[pageNum].question }}</h2>
-      <div class="flexible">
-        <ChoiceList
-          :title="title"
-          v-for="title in questions[pageNum].list"
-          :key="title"
-          @click.native="giftAnswer('giftEvent', titleChangeToNumber(title))"
-        />
-      </div>
-    </div>
-    <div v-else-if="pageNum === 2">
-      <h2>{{ questions[pageNum].question }}</h2>
-      <div class="flexible">
-        <OXButton
-          :title="title"
-          v-for="title in questions[pageNum].list"
-          :key="title"
-          @click.native="giftAnswer('sex', titleChangeToNumber(title))"
-        />
-      </div>
-      <p>상대분의 성별을 선택해주시면 됩니다.</p>
-    </div>
-    <div v-else-if="pageNum === 3">
-      <h2>{{ questions[pageNum].question }}</h2>
-      <div class="flexible">
-        <ChoiceList
-          :title="title"
-          v-for="title in questions[pageNum].list"
-          :key="title"
-          @click.native="giftAnswer('age', ageChangeToNumber(title))"
-        />
-      </div>
-      <p>상대분의 나이를 선택해주시면 됩니다.</p>
-    </div>
-    <div v-else-if="pageNum === 4">
-      <h2>{{ questions[pageNum].question }}</h2>
-      <div class="flexible">
-        <OXButton
-          :title="title"
-          v-for="title in questions[pageNum].list"
-          :key="title"
-          @click.native="giftAnswer('giftAnswerExpensive', title)"
-        />
-      </div>
-    </div>
+    <Question v-if="pageNum === 0" :questionTitle="defaultQuestion">
+      <ChoiceList
+        :title="title"
+        v-for="title in questions[pageNum].list"
+        :key="title"
+        @click.native="giftAnswer('giftTarget', titleChangeToNumber(title))"
+      />
+    </Question>
+    <Question v-if="pageNum === 1" :questionTitle="defaultQuestion">
+      <ChoiceList
+        :title="title"
+        v-for="title in questions[pageNum].list"
+        :key="title"
+        @click.native="giftAnswer('giftEvent', titleChangeToNumber(title))"
+      />
+    </Question>
+    <Question
+      v-if="pageNum === 2"
+      :questionTitle="defaultQuestion"
+      :subText="'상대분의 성별을 선택해주시면 됩니다.'"
+    >
+      <OXButton
+        :title="title"
+        v-for="title in questions[pageNum].list"
+        :key="title"
+        @click.native="giftAnswer('sex', titleChangeToNumber(title))"
+      />
+    </Question>
+    <Question
+      v-if="pageNum === 3"
+      :questionTitle="defaultQuestion"
+      :subText="'상대분의 나이를 선택해주시면 됩니다.'"
+    >
+      <ChoiceList
+        :title="title"
+        v-for="title in questions[pageNum].list"
+        :key="title"
+        @click.native="giftAnswer('age', ageChangeToNumber(title))"
+      />
+    </Question>
+    <Question v-if="pageNum === 4" :questionTitle="defaultQuestion">
+      <OXButton
+        :title="title"
+        v-for="title in questions[pageNum].list"
+        :key="title"
+        @click.native="giftAnswer('giftAnswerExpensive', title)"
+      />
+    </Question>
   </div>
 </template>
 <script>
 import ChoiceList from '@/components/gift/ChoiceList.vue';
 import OXButton from '@/components/gift/OXButton.vue';
 import GiftMixins from '@/mixins/GiftMixins.vue';
+import Question from '@/components/common/Question.vue';
 import { mapGetters } from 'vuex';
 export default {
-  components: { ChoiceList, OXButton },
+  components: { ChoiceList, OXButton, Question },
   mixins: [GiftMixins],
   data() {
     return {
@@ -118,6 +110,9 @@ export default {
     pageNum() {
       return this.currentPageNum;
     },
+    defaultQuestion() {
+      return this.questions[this.pageNum].question;
+    },
   },
   methods: {
     titleChangeToNumber(title) {
@@ -145,18 +140,5 @@ export default {
 @include questionTitle(135px);
 .default-question-wrapper {
   width: 100%;
-
-  > div > .flexible {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  p {
-    text-align: center;
-    margin-top: 60px;
-    color: $main-color;
-    font-weight: $font-bold;
-  }
 }
 </style>
