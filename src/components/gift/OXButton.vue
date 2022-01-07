@@ -10,9 +10,16 @@ export default {
       type: String,
     },
   },
+  computed: {
+    pageNum() {
+      return this.$store.getters.currentPageNum;
+    },
+  },
   methods: {
     moveNextPage() {
-      this.$store.commit('changePageNum', 1);
+      if (this.pageNum !== 8) {
+        this.$store.commit('changePageNum', 1);
+      }
     },
   },
 };
