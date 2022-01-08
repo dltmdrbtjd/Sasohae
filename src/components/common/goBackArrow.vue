@@ -1,10 +1,22 @@
 <template>
-  <div>
+  <div v-if="isGiftPage">
     <img src="@/assets/leftArrow.png" alt="goBack" />
   </div>
 </template>
 <script>
-export default {};
+export default {
+  computed: {
+    pageNum() {
+      return this.$store.getters.currentPageNum;
+    },
+    isGiftPage() {
+      if (this.pageNum === 8) {
+        return false;
+      }
+      return true;
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 div {
