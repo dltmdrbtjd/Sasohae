@@ -5,15 +5,18 @@
         <img :src="giftPhoto" alt="food" />
         <strong>{{ giftName }}</strong>
         <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
-        <span class="shared"></span>
+        <span class="shared" @click="sendKaKaoLink"></span>
       </div>
     </template>
   </Recommended>
 </template>
 <script>
 import Recommended from '@/components/common/Recommended.vue';
+import Shared from '@/mixins/Shared.vue';
+
 export default {
   components: { Recommended },
+  mixins: [Shared],
   data() {
     return {
       selectedId: null,
