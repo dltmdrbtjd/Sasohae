@@ -7,11 +7,7 @@
         <button @click="questionAnswer(2)">아니오.</button>
       </div>
     </div>
-    <Recommended
-      :title="'축의금은 이만큼 내세요!'"
-      v-if="lastQuestion"
-      @recommendEvent="moneyRecommendCnt"
-    >
+    <Recommended :title="'축의금은 이만큼 내세요!'" v-if="lastQuestion">
       <template>
         <div class="recommend-box">
           <img src="@/assets/congratulations_money.png" alt="food" />
