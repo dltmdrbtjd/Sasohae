@@ -3,7 +3,6 @@ export default {
   methods: {
     sendKaKaoLink() {
       this.$kakao.Link.sendDefault({
-        // templateId: '68260',
         objectType: 'feed',
         content: {
           title: '사회초년생의 소소한 고민',
