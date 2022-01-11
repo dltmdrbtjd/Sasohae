@@ -74,6 +74,8 @@ export default {
         this.isModal = false;
         location.reload();
       } catch (e) {
+        const errorMessage = e.response.data.errorMessage;
+        window.alert(errorMessage);
         throw Error(e);
       }
     },
