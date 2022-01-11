@@ -3,7 +3,7 @@
     <div id="view">
       <GoBackButton v-if="isPageCheck" @click.native="goBack" />
       <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLSeSpQbQGZPT5qSGNikADbT08gKCYm2BQGT57iKzzUgoJOxOnA/viewform"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSfvl9PN-wl84hjNxkdxfjMZp9WWlOfvZ4DcsZqBSDswllfXtw/viewform"
         class="report"
         target="_blank"
         v-if="!isPageCheck"
@@ -13,7 +13,7 @@
     </div>
     <div class="share-btn">
       <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLSeSpQbQGZPT5qSGNikADbT08gKCYm2BQGT57iKzzUgoJOxOnA/viewform"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSfvl9PN-wl84hjNxkdxfjMZp9WWlOfvZ4DcsZqBSDswllfXtw/viewform"
         target="_blank"
         >설문조사하고 선물받기<span></span
       ></a>
