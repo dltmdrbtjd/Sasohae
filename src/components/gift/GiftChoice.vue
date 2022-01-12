@@ -67,18 +67,31 @@
       @recommendEvent="recommendCnt"
     >
       <template>
-        <div class="recommend-box">
-          <img :src="giftPhoto" alt="food" />
-          <strong>{{ giftName }}</strong>
-          <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
-          <span class="unlike-button" :class="islike" @click="likeGift"></span>
-          <span class="shared" @click="sendKaKaoLink"></span>
+        <div v-if="isloading" class="recommend-box">
+          <Spinner />
         </div>
-        <button class="refresh" @click="giftRefresh" :disabled="refreshDisable">
-          <span />
-          <p>다른 추천도 준비했어요!</p>
-          <p>{{ giftQuantity }}</p>
-        </button>
+        <div v-else>
+          <div class="recommend-box">
+            <img :src="giftPhoto" alt="food" />
+            <strong>{{ giftName }}</strong>
+            <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
+            <span
+              class="unlike-button"
+              :class="islike"
+              @click="likeGift"
+            ></span>
+            <span class="shared" @click="sendKaKaoLink"></span>
+          </div>
+          <button
+            class="refresh"
+            @click="giftRefresh"
+            :disabled="refreshDisable"
+          >
+            <span />
+            <p>다른 추천도 준비했어요!</p>
+            <p>{{ giftQuantity }}</p>
+          </button>
+        </div>
       </template>
     </Recommended>
   </div>
@@ -89,8 +102,9 @@ import GiftMixins from '@/mixins/GiftMixins.vue';
 import Recommended from '@/components/common/Recommended.vue';
 import Shared from '@/mixins/Shared.vue';
 import Question from '@/components/common/Question.vue';
+import Spinner from '@/components/common/Spinner.vue';
 export default {
-  components: { DefaultQuestion, Recommended },
+  components: { DefaultQuestion, Recommended, Spinner },
   mixins: [GiftMixins, Shared, Question],
   data() {
     return {
@@ -99,6 +113,7 @@ export default {
       surveyGifts: [],
       giftQuantitys: 0,
       likes: false,
+      isloading: false,
     };
   },
   computed: {
@@ -192,11 +207,13 @@ export default {
     },
     async answerReuqest() {
       try {
+        this.isloading = true;
         const body = this.giftAnswers;
         const resp = await this.$http.post('/gifts', body);
         this.selectedId = resp.data.selectedGift_id;
         this.surveyGifts = resp.data.surveyGifts;
         this.giftQuantitys = resp.data.surveyGifts.length;
+        this.isloading = false;
       } catch (e) {
         throw Error(e);
       }

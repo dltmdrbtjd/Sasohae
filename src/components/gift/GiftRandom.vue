@@ -1,7 +1,10 @@
 <template>
   <Recommended :title="'랜덤 추천 선물이에요!'">
     <template>
-      <div class="recommend-box">
+      <div v-if="isloading" class="recommend-box">
+        <Spinner />
+      </div>
+      <div v-else class="recommend-box">
         <img :src="giftPhoto" alt="food" />
         <strong>{{ giftName }}</strong>
         <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
@@ -13,14 +16,16 @@
 <script>
 import Recommended from '@/components/common/Recommended.vue';
 import Shared from '@/mixins/Shared.vue';
+import Spinner from '@/components/common/Spinner.vue';
 
 export default {
-  components: { Recommended },
+  components: { Recommended, Spinner },
   mixins: [Shared],
   data() {
     return {
       selectedId: null,
       randomGifts: [],
+      isloading: false,
     };
   },
   mounted() {
@@ -56,8 +61,10 @@ export default {
   methods: {
     async answerReuqest() {
       try {
+        this.isloading = true;
         const resp = await this.$http.get('/gifts/random');
         this.randomGifts = resp.data.randomGifts;
+        this.isloading = false;
       } catch (e) {
         throw Error(e);
       }

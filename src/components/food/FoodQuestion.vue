@@ -21,26 +21,31 @@
         @recommendEvent="menuRecommendCnt"
       >
         <template>
-          <div class="recommend-box">
-            <img :src="menuPhoto" alt="food" />
-            <strong>{{ menuName }}</strong>
-            <p>지금까지 {{ menuLikeCnt }}명이 추천했어요!</p>
-            <span
-              class="unlike-button"
-              :class="islike"
-              @click="likeFood"
-            ></span>
-            <span class="shared" @click="sendKaKaoLink"></span>
+          <div v-if="isloading" class="recommend-box">
+            <Spinner />
           </div>
-          <button
-            class="refresh"
-            @click="menuRefresh"
-            :disabled="refreshDisable"
-          >
-            <span />
-            <p>다른 추천도 준비했어요!</p>
-            <p>{{ menuQuantity }}</p>
-          </button>
+          <div v-else>
+            <div class="recommend-box">
+              <img :src="menuPhoto" alt="food" />
+              <strong>{{ menuName }}</strong>
+              <p>지금까지 {{ menuLikeCnt }}명이 추천했어요!</p>
+              <span
+                class="unlike-button"
+                :class="islike"
+                @click="likeFood"
+              ></span>
+              <span class="shared" @click="sendKaKaoLink"></span>
+            </div>
+            <button
+              class="refresh"
+              @click="menuRefresh"
+              :disabled="refreshDisable"
+            >
+              <span />
+              <p>다른 추천도 준비했어요!</p>
+              <p>{{ menuQuantity }}</p>
+            </button>
+          </div>
         </template>
       </Recommended>
     </div>
@@ -50,8 +55,9 @@
 import CategoryButton from '@/components/food/CategoryButton.vue';
 import Recommended from '@/components/common/Recommended.vue';
 import Shared from '@/mixins/Shared.vue';
+import Spinner from '@/components/common/Spinner.vue';
 export default {
-  components: { CategoryButton, Recommended },
+  components: { CategoryButton, Recommended, Spinner },
   mixins: [Shared],
   computed: {
     islike() {
@@ -93,9 +99,13 @@ export default {
       return false;
     },
   },
+  mounted() {
+    console.log(this.menuAnswer);
+  },
   data() {
     return {
       recommend: false,
+      isloading: false,
       surveyMenus: [],
       menuQuantitys: 0,
       likes: false,
@@ -127,12 +137,23 @@ export default {
       }
     },
     async recommended() {
-      this.$store.commit('menuReset');
-      const answer = this.menuAnswer;
-      const resp = await this.$http.post('/menu', answer);
-      this.surveyMenus = resp.data;
-      this.menuQuantitys = resp.data.length;
-      this.recommend = true;
+      if (
+        this.menuAnswer &&
+        this.menuAnswer.menuStyle &&
+        this.menuAnswer.menuType &&
+        this.menuAnswer.menuWith
+      ) {
+        this.isloading = true;
+        const answer = this.menuAnswer;
+        const resp = await this.$http.post('/menu', answer);
+        this.surveyMenus = resp.data;
+        this.menuQuantitys = resp.data.length;
+        this.recommend = true;
+        this.isloading = false;
+        this.$store.commit('menuReset');
+      } else {
+        window.alert('모두 선택해주세요 !');
+      }
     },
     menuRefresh() {
       this.likes = false;
