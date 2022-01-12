@@ -42,6 +42,9 @@ const mutations = {
     state.hashTag.with = person;
   },
   menuReset(state) {
+    state.menuSetting.menuType = '';
+    state.menuSetting.menuStyle = '';
+    state.menuSetting.menuWith = '';
     state.hashTag.type = '';
     state.hashTag.with = '';
     state.hashTag.style = '';
