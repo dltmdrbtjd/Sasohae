@@ -36,6 +36,7 @@ jobs:
           touch .env
           echo VUE_APP_BASE_URL="$ENV_VUE_APP_BASE_URL" >> .env
           echo VUE_APP_KAKAO="$ENV_VUE_APP_KAKAO" >> .env
+          echo VUE_APP_TRACKING_ID >> .env
           cat .env
 
       - name: build
