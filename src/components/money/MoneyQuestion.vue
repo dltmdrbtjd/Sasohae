@@ -60,11 +60,15 @@ export default {
       }
     },
     async questionAnswer(answer) {
-      if (answer === 1 && this.question.positiveAnswerQuestion !== 'X')
+      if (answer === 1 && this.question.positiveAnswerQuestion !== 'X') {
         answer = 'O';
-      else if (answer === 2 && this.question.negativeAnswerQuestion !== 'X')
+        this.recommendMoneyCnt += this.question.positiveChangeValue;
+      } else if (answer === 2 && this.question.negativeAnswerQuestion !== 'X')
         answer = 'X';
       else {
+        if (answer === 1) {
+          this.recommendMoneyCnt += this.question.positiveChangeValue;
+        }
         this.moneyRecommendCnt();
         this.lastQuestion = true;
       }
@@ -77,8 +81,6 @@ export default {
         const nextQuestion = resp.data;
         if (this.recommendMoneyCnt <= 0) {
           this.recommendMoneyCnt = 0;
-        } else {
-          this.recommendMoneyCnt += nextQuestion.positiveChangeValue;
         }
         this.question = nextQuestion;
       } catch (e) {
