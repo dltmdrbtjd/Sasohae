@@ -36,14 +36,14 @@ export default {
           keys: 1,
           name: 'gift',
           image: gift,
-          title1: '친구 선물',
+          title1: '선물은',
           title2: '이거 어때요?',
         },
         {
           keys: 2,
           name: 'food',
           image: food,
-          title1: '오늘 점심은',
+          title1: '오늘 메뉴는',
           title2: '이게 좋아요!',
         },
         {
