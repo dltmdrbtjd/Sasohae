@@ -17,22 +17,22 @@
     </div>
     <div class="ranking-board">
       <span>
-        <p>#{{ ranking[0].title }}</p>
-        <p>#{{ ranking[3].title }}</p>
+        <p>#{{ ranking[0] && ranking[0].title }}</p>
+        <p>#{{ ranking[3] && ranking[3].title }}</p>
       </span>
       <span>
-        <p>#{{ ranking[1].title }}</p>
-        <p>#{{ ranking[5].title }}</p>
-        <p>#{{ ranking[7].title }}</p>
+        <p>#{{ ranking[1] && ranking[1].title }}</p>
+        <p>#{{ ranking[5] && ranking[5].title }}</p>
+        <p>#{{ ranking[7] && ranking[7].title }}</p>
       </span>
       <span>
-        <p>#{{ ranking[2].title }}</p>
-        <p>#{{ ranking[4].title }}</p>
+        <p>#{{ ranking[2] && ranking[2].title }}</p>
+        <p>#{{ ranking[4] && ranking[4].title }}</p>
       </span>
       <span>
-        <p>#{{ ranking[6].title }}</p>
-        <p>#{{ ranking[8].title }}</p>
-        <p>#{{ ranking[9].title }}</p>
+        <p>#{{ ranking[6] && ranking[6].title }}</p>
+        <p>#{{ ranking[8] && ranking[8].title }}</p>
+        <p>#{{ ranking[9] && ranking[9].title }}</p>
       </span>
     </div>
     <img src="@/assets/character.png" alt="character" />
