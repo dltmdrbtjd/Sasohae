@@ -20,9 +20,17 @@ export default {
     categoryValue(list) {
       this.menuHashTag(list);
       let num = this.category.list.findIndex((i) => i === list);
-      if (num === 0 && list !== '식사') num = '*';
-      else if (num === 0 && list === '식사') num += 1;
-      this.menuSettingAnswer(num);
+      if (num === 0 && list !== '식사') {
+        num = '*';
+        this.menuSettingAnswer(num);
+        return;
+      } else if (this.category.title === '목적') {
+        num += 1;
+        this.menuSettingAnswer(num);
+      } else if (num >= 0 && list !== '식사') {
+        this.menuSettingAnswer(num);
+        return;
+      }
     },
     menuSettingAnswer(types) {
       switch (this.category.title) {
