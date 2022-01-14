@@ -12,6 +12,7 @@
         <div class="recommend-box">
           <img src="@/assets/congratulations_money.png" alt="food" />
           <strong>{{ recommendMoneyCnt }} 만원</strong>
+          <p v-if="isZeroMoney">봉투만 전해주세요!!</p>
           <span @click="sendKaKaoLink" class="shared"></span>
         </div>
       </template>
@@ -36,6 +37,14 @@ export default {
       recommendMoneyCnt: 5,
       lastQuestion: false,
     };
+  },
+  computed: {
+    isZeroMoney() {
+      if (this.recommendMoneyCnt <= 1) {
+        return true;
+      }
+      return false;
+    },
   },
   mounted() {
     this.getMoneyQuestion();
@@ -66,7 +75,11 @@ export default {
         };
         const resp = await this.$http.post('/money', answers);
         const nextQuestion = resp.data;
-        this.recommendMoneyCnt += nextQuestion.positiveChangeValue;
+        if (this.recommendMoneyCnt <= 0) {
+          this.recommendMoneyCnt = 0;
+        } else {
+          this.recommendMoneyCnt += nextQuestion.positiveChangeValue;
+        }
         this.question = nextQuestion;
       } catch (e) {
         throw Error(e);
