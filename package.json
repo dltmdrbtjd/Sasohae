@@ -12,10 +12,12 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "babel-jest": "^27.4.6",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-gtag": "^1.16.1",
     "vue-infinite-loading": "^2.4.5",
+    "vue-jest": "^3.0.7",
     "vue-kakao-sdk": "^0.2.5",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
