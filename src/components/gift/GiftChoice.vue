@@ -75,12 +75,14 @@
             <img :src="giftPhoto" alt="food" />
             <strong>{{ giftName }}</strong>
             <p>지금까지 {{ giftLikeCnt }}명이 추천했어요!</p>
-            <span
-              class="unlike-button"
-              :class="islike"
-              @click="likeGift"
-            ></span>
-            <span class="shared" @click="sendKaKaoLink"></span>
+            <div class="button-box">
+              <span
+                class="unlike-button"
+                :class="islike"
+                @click="likeGift"
+              ></span>
+              <span class="shared" @click="sendKaKaoLink"></span>
+            </div>
           </div>
           <button
             class="refresh"
