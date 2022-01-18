@@ -1,22 +1,47 @@
 import CategoryButton from '../CategoryButton.vue';
-import Vuex from 'vuex';
-import { createLocalVue, shallowMount } from '@vue/test-utils';
-import store from '@/store';
+import Vuex, { Store } from 'vuex';
+import { createLocalVue, mount } from '@vue/test-utils';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('CategoryButton Component Testing', () => {
-  const wrapper = shallowMount(CategoryButton, {
-    propsData: {
-      category: {
-        title: '목적',
-        list: [],
-      },
+const store = new Store({
+  state: {
+    menuSetting: {
+      menuType: '',
+      menuStyle: '',
+      menuWith: '',
     },
+    hashTag: {
+      type: '',
+      style: '',
+      with: '',
+    },
+  },
+  getters: {},
+});
+
+const mocks = {
+  $store: store,
+};
+
+describe('CategoryButton Component Testing', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(CategoryButton, {
+      mocks,
+      propsData: {
+        category: {
+          title: '목적',
+          list: [],
+        },
+      },
+    });
   });
-  it('categoryValue', async () => {
-    await wrapper.vm.menuHashTag('테스트1');
-    expect(store.state.food.hashTag.type).toEqual('테스트1');
+
+  it('categoryValue', () => {
+    const mock = '목적';
+    wrapper.vm.menuHashTag(mock);
+    expect(store.commit).toHaveBeenNthCalledWith('menuType', { tag: '목적' });
   });
 });
