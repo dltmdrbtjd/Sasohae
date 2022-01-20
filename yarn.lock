@@ -11003,7 +11003,7 @@ negotiator@0.6.2:
   resolved "https://registry.nlark.com/negotiator/download/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha1-/qz3zPUlp3rpY0Q2pkiD/+yjRvs=
 
-neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
+neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1, neo-async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.npm.taobao.org/neo-async/download/neo-async-2.6.2.tgz?cache=0&sync_timestamp=1594321519569&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fneo-async%2Fdownload%2Fneo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha1-tKr7k+OustgXTKU88WOrfXMIMF8=
@@ -13480,16 +13480,16 @@ sass-graph@2.2.5:
     scss-tokenizer "^0.2.3"
     yargs "^13.3.2"
 
-sass-loader@^8.0.2:
-  version "8.0.2"
-  resolved "https://registry.npmmirror.com/sass-loader/download/sass-loader-8.0.2.tgz#debecd8c3ce243c76454f2e8290482150380090d"
-  integrity sha1-3r7NjDziQ8dkVPLoKQSCFQOACQ0=
+sass-loader@^10.1.1:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.2.1.tgz#17e51df313f1a7a203889ce8ff91be362651276e"
+  integrity sha512-RRvWl+3K2LSMezIsd008ErK4rk6CulIMSwrcc2aZvjymUgKo/vjXGp1rSWmfTUX7bblEOz8tst4wBwWtCGBqKA==
   dependencies:
-    clone-deep "^4.0.1"
-    loader-utils "^1.2.3"
-    neo-async "^2.6.1"
-    schema-utils "^2.6.1"
-    semver "^6.3.0"
+    klona "^2.0.4"
+    loader-utils "^2.0.0"
+    neo-async "^2.6.2"
+    schema-utils "^3.0.0"
+    semver "^7.3.2"
 
 sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
@@ -13529,7 +13529,7 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-schema-utils@^2.0.0, schema-utils@^2.5.0, schema-utils@^2.6.1, schema-utils@^2.6.5, schema-utils@^2.7.0:
+schema-utils@^2.0.0, schema-utils@^2.5.0, schema-utils@^2.6.5, schema-utils@^2.7.0:
   version "2.7.1"
   resolved "https://registry.npmmirror.com/schema-utils/download/schema-utils-2.7.1.tgz?cache=0&sync_timestamp=1637076118436&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fschema-utils%2Fdownload%2Fschema-utils-2.7.1.tgz#1ca4f32d1b24c590c203b8e7a50bf0ea4cd394d7"
   integrity sha1-HKTzLRskxZDCA7jnpQvw6kzTlNc=
@@ -14065,6 +14065,11 @@ store2@^2.12.0:
   version "2.13.1"
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.13.1.tgz#fae7b5bb9d35fc53dc61cd262df3abb2f6e59022"
   integrity sha512-iJtHSGmNgAUx0b/MCS6ASGxb//hGrHHRgzvN+K5bvkBTN7A9RTpPSf1WSp+nPGvWCJ1jRnvY7MKnuqfoi3OEqg==
+
+storybook-vue-router@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/storybook-vue-router/-/storybook-vue-router-1.0.7.tgz#366451212149d9d0a32557545b244667bb01768e"
+  integrity sha512-R+DYARQ40YVbMbV5moLDmQvodJX5FQPVy5cULb782P1gD5rAkulWtgt8yrM7pmjYru+LTPdLS4blrFPnWlb0sQ==
 
 stream-browserify@^2.0.1:
   version "2.0.2"
@@ -15313,24 +15318,7 @@ vue-infinite-loading@^2.4.5:
   resolved "https://registry.yarnpkg.com/vue-infinite-loading/-/vue-infinite-loading-2.4.5.tgz#cc20fd40af7f20188006443c99b60470cf1de1b3"
   integrity sha512-xhq95Mxun060bRnsOoLE2Be6BR7jYwuC89kDe18+GmCLVrRA/dU0jrGb12Xu6NjmKs+iTW0AA6saSEmEW4cR7g==
 
-vue-jest@^3.0.5:
-  version "3.0.7"
-  resolved "https://registry.npmmirror.com/vue-jest/download/vue-jest-3.0.7.tgz#a6d29758a5cb4d750f5d1242212be39be4296a33"
-  integrity sha1-ptKXWKXLTXUPXRJCISvjm+QpajM=
-  dependencies:
-    babel-plugin-transform-es2015-modules-commonjs "^6.26.0"
-    chalk "^2.1.0"
-    deasync "^0.1.15"
-    extract-from-css "^0.4.4"
-    find-babel-config "^1.1.0"
-    js-beautify "^1.6.14"
-    node-cache "^4.1.1"
-    object-assign "^4.1.1"
-    source-map "^0.5.6"
-    tsconfig "^7.0.0"
-    vue-template-es2015-compiler "^1.6.0"
-
-vue-jest@^3.0.7:
+vue-jest@^3.0.5, vue-jest@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/vue-jest/-/vue-jest-3.0.7.tgz#a6d29758a5cb4d750f5d1242212be39be4296a33"
   integrity sha512-PIOxFM+wsBMry26ZpfBvUQ/DGH2hvp5khDQ1n51g3bN0TwFwTy4J85XVfxTRMukqHji/GnAoGUnlZ5Ao73K62w==
