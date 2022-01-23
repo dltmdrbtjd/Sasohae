@@ -13,9 +13,6 @@ export default {
     title: {
       type: String,
     },
-    recoomendItem: {
-      type: Object,
-    },
   },
   methods: {
     goMainPage() {
