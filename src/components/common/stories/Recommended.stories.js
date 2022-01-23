@@ -8,8 +8,10 @@ export default {
 const Template = (_, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { Recommended },
-  template: "<Recommended v-bind='$props' />",
+  template: "<div style='width:390px'><Recommended v-bind='$props' /></div>",
 });
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  title: '오늘 저녁은 이거어때요?'
+};
