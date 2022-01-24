@@ -1,5 +1,4 @@
 # 사회초년생들의 소소한 고민 🤔🧐😎
-
 <p align='center'>
   <img width="70%" src="https://user-images.githubusercontent.com/59644518/150786531-2c2c6f64-bc0f-4d89-a5a3-017dc085ba83.png">
 </p>
@@ -23,6 +22,7 @@
 
 
 ## 🏘 사소한것들이 고민이될때, 가볍게 해결해요 !
+- Sasohae : https://sasohae.com/
 
 ## 🎉 사소해(Sasohae) 소개
 ### 🎁 선물은 어떤걸 주는게 좋을까?
