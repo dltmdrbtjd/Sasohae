@@ -41,13 +41,12 @@
 
 |🔗메인 페이지|🔗선물 추천 페이지|🔗추천 완료 페이지|🔗메뉴 추천 페이지|
 |:--:|:--:|:--:|:--:|
-|<img width="320" alt="KakaoTalk_20210829_212233" src="https://user-images.githubusercontent.com/59644518/150804496-e10a0167-27aa-465b-a5c3-a0207d01e55e.png">|<img width="317" alt="회원가입" src="https://user-images.githubusercontent.com/59644518/150804745-dd1127c2-9352-4e7d-80a3-081a3ae78cb7.png">|<img width="318" alt="KakaoTalk_20210830_134449" src="https://user-images.githubusercontent.com/59644518/150804818-6332b2fd-4dc5-437f-838f-99e3238f7bf9.png">|<img width="318" alt="KakaoTalk_20210829_212507" src="https://user-images.githubusercontent.com/59644518/150804882-df224eed-0116-4bde-afb9-efc299d16c61.png">|
+|<img width="320" alt="KakaoTalk_20210829_212233" src="https://user-images.githubusercontent.com/59644518/150804496-e10a0167-27aa-465b-a5c3-a0207d01e55e.png">|<img width="317" alt="회원가입" src="https://user-images.githubusercontent.com/59644518/150804745-dd1127c2-9352-4e7d-80a3-081a3ae78cb7.png">|<img width="318" alt="KakaoTalk_20210830_134449" src="https://user-images.githubusercontent.com/59644518/150804818-6332b2fd-4dc5-437f-838f-99e3238f7bf9.png">|<img width="318" alt="KakaoTalk_20210829_212507" src="https://user-images.githubusercontent.com/59644518/150808481-ee0b2db1-0a70-4954-96dd-4b8eb1f6a128.png">|
 
 
 |🔗축의금 추천 페이지|🔗고민 게시판 페이지|🔗실시간 랭킹 페이지|🔗랜덤 추천 페이지|
 |:--:|:--:|:--:|:--:|
 |<img width="320" alt="KakaoTalk_20210829_212233" src="https://user-images.githubusercontent.com/59644518/150805007-6605f6f9-b774-4e44-a23a-b75e67f0e773.png">|<img width="317" alt="회원가입" src="https://user-images.githubusercontent.com/59644518/150805102-03b91962-2462-49c6-b7c8-bc1577792065.png">|<img width="318" alt="KakaoTalk_20210830_134449" src="https://user-images.githubusercontent.com/59644518/150805202-dcb8c7b5-9914-4f6e-b3b9-6b9c465963bf.png">|<img width="318" alt="KakaoTalk_20210829_212507" src="https://user-images.githubusercontent.com/59644518/150805309-acd92b63-51d7-4a6f-8c7c-8386965bf29d.png">|
-
 
 ## 🎫 프로젝트 구조
 ![image](https://user-images.githubusercontent.com/59644518/150806613-1b9c38c6-0e7f-4c89-8a39-366ac21db255.png)
