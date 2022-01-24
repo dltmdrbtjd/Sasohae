@@ -9,8 +9,8 @@
   <img src='https://img.shields.io/badge/Vue-v2.6.11-blue?logo=Vue.js'/>
   <img src="https://img.shields.io/badge/JavaScript-yellow?logo=javascript"/>
   <img src='https://img.shields.io/badge/VueRouter-v3.2.0-pink?logo=VueRouter'/>
-  <img src='https://img.shields.io/badge/node-sass-v4.14.1-violet?logo=Sass'/>
   <img src='https://img.shields.io/badge/Vuex-v3.4.0-blue?logo=Redux'/>
+  <img src='https://img.shields.io/badge/nodeSass-v4.14.1-violet?logo=Sass'/>
 <!--   <img src='https://img.shields.io/badge/ReduxToolkit-v1.6.1-764ABC?'/> -->
 <!--   <img src='https://img.shields.io/badge/Node-v14.15.4-green?logo=Node.js'/>
   <img src='https://img.shields.io/badge/Axios-v0.21.1-pink?'/>
