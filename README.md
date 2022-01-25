@@ -38,7 +38,6 @@
 > - 어디가서 말못할 고민들을 남겨보고 함께 공감해보세요.
 
 ## 📌 주요 페이지
-
 |🔗메인 페이지|🔗선물 추천 페이지|🔗추천 완료 페이지|🔗메뉴 추천 페이지|
 |:--:|:--:|:--:|:--:|
 |<img width="320" alt="KakaoTalk_20210829_212233" src="https://user-images.githubusercontent.com/59644518/150804496-e10a0167-27aa-465b-a5c3-a0207d01e55e.png">|<img width="317" alt="회원가입" src="https://user-images.githubusercontent.com/59644518/150804745-dd1127c2-9352-4e7d-80a3-081a3ae78cb7.png">|<img width="318" alt="KakaoTalk_20210830_134449" src="https://user-images.githubusercontent.com/59644518/150804818-6332b2fd-4dc5-437f-838f-99e3238f7bf9.png">|<img width="318" alt="KakaoTalk_20210829_212507" src="https://user-images.githubusercontent.com/59644518/150808481-ee0b2db1-0a70-4954-96dd-4b8eb1f6a128.png">|
